@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOM KENAL NOMBOR 0–10 BERSAMA UPIN & IPIN!</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for legible child-friendly typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, #70C8FF 0%, #E0F2FE 45%, #BAE6FD 75%, #4ADE80 100%);
+            min-height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .font-comic {
+            font-family: 'Fredoka', cursive;
+        }
+
+        /* Glassmorphism & Game Cards */
+        .game-card {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.18), 0 8px 12px -6px rgba(0, 0, 0, 0.1);
+            border: 5px solid #FBBF24;
+            border-radius: 2rem;
+        }
+
+        /* Interactive Buttons Hover and Active Bounce */
+        .btn-bounce {
+            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+        }
+
+        .btn-bounce:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 0 rgba(0,0,0,0.15);
+        }
+
+        .btn-bounce:active {
+            transform: translateY(4px) scale(0.98);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+        }
+
+        /* Object Counting Specific Effect */
+        .count-obj {
+            transition: all 0.25s ease;
+        }
+
+        .count-obj.counted {
+            transform: scale(1.18) rotate(6deg);
+            filter: drop-shadow(0 0 12px #FBBF24);
+        }
+
+        /* Pulse Highlight for Characters */
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        .pulse-gentle {
+            animation: gentle-pulse 2.8s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E0F2FE;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284C7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-between items-center min-h-screen p-2 sm:p-4 md:p-6 overflow-x-hidden text-gray-800">
+
+    <!-- Background Decorative Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-4 right-6 text-6xl md:text-8xl animate-spin" style="animation-duration: 45s;">☀️</div>
+        <div class="absolute top-8 left-10 text-5xl md:text-7xl opacity-80">☁️</div>
+        <div class="absolute top-16 left-1/2 text-6xl opacity-90">☁️</div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-repeat-x opacity-20" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 120\' preserveAspectRatio=\'none\'><path d=\'M0,0 C150,90 350,-40 500,40 C650,120 900,20 1200,60 L1200,120 L0,120 Z\' fill=\'%2316A34A\'/></svg>');"></div>
+    </div>
+
+    <!-- Top Bar Header -->
+    <header class="w-full max-w-4xl z-10 flex flex-col sm:flex-row justify-between items-center bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl border-3 border-amber-400 mb-3 shadow-md">
+        <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+            <!-- Official SVG Character Badge -->
+            <div class="w-12 h-12 bg-amber-100 rounded-full border-2 border-amber-400 flex items-center justify-center p-0.5 overflow-hidden shadow-inner">
+                <svg viewBox="0 0 100 100" class="w-full h-full">
+                    <circle cx="50" cy="50" r="45" fill="#FEF08A"/>
+                    <circle cx="35" cy="45" r="18" fill="#FDE047"/>
+                    <circle cx="65" cy="45" r="18" fill="#FDE047"/>
+                    <!-- Upin hair strand -->
+                    <path d="M35,27 C33,18 40,15 36,8" stroke="#78350F" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <circle cx="30" cy="42" r="3" fill="#1E293B"/>
+                    <circle cx="40" cy="42" r="3" fill="#1E293B"/>
+                    <path d="M30,52 Q35,58 40,52" stroke="#B45309" stroke-width="2.5" fill="none"/>
+                    <circle cx="60" cy="42" r="3" fill="#1E293B"/>
+                    <circle cx="70" cy="42" r="3" fill="#1E293B"/>
+                    <path d="M60,52 Q65,58 70,52" stroke="#B45309" stroke-width="2.5" fill="none"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="font-comic text-xl sm:text-2xl text-amber-700 leading-tight">MATEMATIK PPKI TAHUN 1</h1>
+                <p class="text-xs sm:text-sm font-bold text-sky-700">Mengenal Nombor & Mengira 0–10</p>
+            </div>
+        </div>
+        <div id="player-badge" class="hidden flex items-center space-x-2 bg-amber-100 px-4 py-1.5 rounded-full border border-amber-300">
+            <span class="text-lg">👦🏻</span>
+            <span id="display-player-name" class="font-bold text-amber-900 text-sm sm:text-base">Murid</span>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-4xl z-10 flex-grow flex flex-col justify-center items-center my-auto">
+
+        <!-- ================= START SCREEN ================= -->
+        <section id="screen-start" class="w-full game-card p-6 sm:p-10 text-center flex flex-col items-center my-auto">
+            
+            <!-- Authentic Character Banner Illustration -->
+            <div class="relative w-full max-w-md bg-gradient-to-r from-amber-100 via-yellow-100 to-sky-100 rounded-3xl p-4 border-3 border-amber-300 shadow-inner mb-5 flex items-center justify-center space-x-4 pulse-gentle">
+                
+                <!-- Upin Visual Pose -->
+                <div class="flex flex-col items-center">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 bg-amber-200 rounded-full border-4 border-amber-400 flex items-center justify-center shadow-md relative overflow-hidden bg-contain bg-center bg-no-record">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="46" fill="#FEF08A"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="42" r="32" fill="#FDE047"/>
+                            <!-- Upin single hair strand -->
+                            <path d="M50,10 C47,-2 58,-4 52,-14" stroke="#78350F" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                            <!-- Eyes -->
+                            <circle cx="38" cy="38" r="4.5" fill="#0F172A"/>
+                            <circle cx="62" cy="38" r="4.5" fill="#0F172A"/>
+                            <circle cx="40" cy="36" r="1.5" fill="#FFFFFF"/>
+                            <circle cx="64" cy="36" r="1.5" fill="#FFFFFF"/>
+                            <!-- Smile -->
+                            <path d="M38,52 Q50,66 62,52" stroke="#B45309" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            <!-- Yellow Shirt U -->
+                            <path d="M22,80 L78,80 L72,100 L28,100 Z" fill="#F59E0B"/>
+                            <text x="50" y="96" font-family="Fredoka" font-size="16" fill="#FFFFFF" font-weight="bold" text-anchor="middle">U</text>
+                        </svg>
+                    </div>
+                    <span class="font-comic text-xs sm:text-sm text-amber-900 font-bold mt-1 bg-amber-200 px-3 py-0.5 rounded-full border border-amber-400">UPIN</span>
+                </div>
+
+                <!-- Center Title Icon -->
+                <div class="text-4xl sm:text-5xl">✨</div>
+
+                <!-- Ipin Visual Pose -->
+                <div class="flex flex-col items-center">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 bg-sky-200 rounded-full border-4 border-sky-400 flex items-center justify-center shadow-md relative overflow-hidden">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="46" fill="#BAE6FD"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="42" r="32" fill="#FDE047"/>
+                            <!-- Eyes -->
+                            <circle cx="38" cy="38" r="4.5" fill="#0F172A"/>
+                            <circle cx="62" cy="38" r="4.5" fill="#0F172A"/>
+                            <circle cx="40" cy="36" r="1.5" fill="#FFFFFF"/>
+                            <circle cx="64" cy="36" r="1.5" fill="#FFFFFF"/>
+                            <!-- Cheerful big smile -->
+                            <path d="M36,50 Q50,68 64,50" stroke="#B45309" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            <!-- Blue Shirt I -->
+                            <path d="M22,80 L78,80 L72,100 L28,100 Z" fill="#0284C7"/>
+                            <text x="50" y="96" font-family="Fredoka" font-size="16" fill="#FFFFFF" font-weight="bold" text-anchor="middle">I</text>
+                        </svg>
+                    </div>
+                    <span class="font-comic text-xs sm:text-sm text-sky-900 font-bold mt-1 bg-sky-200 px-3 py-0.5 rounded-full border border-sky-400">IPIN</span>
+                </div>
+
+            </div>
+
+            <h2 class="font-comic text-2xl sm:text-4xl text-amber-600 mb-2 leading-tight">
+                JOM KENAL NOMBOR 0–10!
+            </h2>
+            <p class="text-base sm:text-xl font-bold text-sky-700 mb-6">
+                Belajar dan Mengira Bersama Upin & Ipin
+            </p>
+
+            <!-- Name Input Box -->
+            <div class="w-full max-w-md bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 mb-6 shadow-sm">
+                <label for="input-player-name" class="block font-comic text-base sm:text-lg text-amber-900 mb-2">
+                    Masukkan Nama Murid:
+                </label>
+                <input type="text" id="input-player-name" placeholder="Contoh: Adam / Siti" 
+                       class="w-full text-center font-bold text-lg sm:text-2xl px-4 py-3 rounded-xl border-3 border-amber-400 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all text-gray-800"
+                       maxlength="20" autocomplete="off">
+                
+                <p id="name-greeting" class="text-emerald-700 font-bold mt-3 text-base sm:text-lg hidden">
+                    Hai, <span id="greeting-name-span" class="text-amber-700 underline"></span>! Jom kita bermain!
+                </p>
+                <p id="name-error" class="text-red-500 font-bold mt-2 text-sm hidden">
+                    ⚠️ Sila masukkan nama murid dahulu ya!
+                </p>
+            </div>
+
+            <button id="btn-start-game" onclick="startGame()" 
+                    class="btn-bounce bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-500 hover:to-yellow-600 text-white font-comic text-xl sm:text-3xl px-8 py-4 rounded-full border-4 border-yellow-200 cursor-pointer flex items-center space-x-3">
+                <span>🚀 MULA BERMAIN</span>
+            </button>
+        </section>
+
+        <!-- ================= QUIZ SCREEN ================= -->
+        <section id="screen-quiz" class="w-full game-card p-4 sm:p-8 hidden flex flex-col justify-between my-auto">
+            
+            <!-- Top Progress & Score Row -->
+            <div class="flex justify-between items-center mb-4 pb-3 border-b-2 border-gray-100">
+                <!-- Question Counter Badge -->
+                <div class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full font-bold text-sm sm:text-lg border border-sky-300 flex items-center space-x-2">
+                    <span>📌</span>
+                    <span id="question-progress-text">Soalan 1/20</span>
+                </div>
+                
+                <!-- Current Score Badge -->
+                <div class="bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full font-bold text-sm sm:text-lg border border-amber-300 flex items-center space-x-2">
+                    <span>⭐</span>
+                    <span>Markah: <span id="current-score-text" class="text-amber-700 font-extrabold">0</span></span>
+                </div>
+            </div>
+
+            <!-- Question Instruction Header -->
+            <div class="bg-amber-50 rounded-2xl p-4 sm:p-5 border-2 border-amber-200 mb-5 flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <!-- Character Companion Icon -->
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-amber-200 flex-shrink-0 flex items-center justify-center border-2 border-amber-400 overflow-hidden">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="46" fill="#FEF08A"/>
+                            <circle cx="50" cy="42" r="32" fill="#FDE047"/>
+                            <path d="M50,10 C47,-2 58,-4 52,-14" stroke="#78350F" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                            <circle cx="38" cy="38" r="4.5" fill="#0F172A"/>
+                            <circle cx="62" cy="38" r="4.5" fill="#0F172A"/>
+                            <path d="M38,52 Q50,64 62,52" stroke="#B45309" stroke-width="4" fill="none"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span id="activity-type-badge" class="text-xs font-bold uppercase tracking-wider text-amber-900 bg-amber-200 px-2.5 py-0.5 rounded-md border border-amber-300">
+                            Bahagian A
+                        </span>
+                        <h3 id="question-instruction" class="font-comic text-lg sm:text-2xl text-amber-950 mt-1 leading-snug">
+                            Arahan Soalan
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Text-To-Speech Button -->
+                <button onclick="readQuestionAudio()" title="Dengar Arahan" 
+                        class="btn-bounce bg-sky-500 hover:bg-sky-600 text-white p-3 rounded-2xl flex-shrink-0 flex items-center justify-center shadow-md cursor-pointer border-2 border-sky-300">
+                    <span class="text-2xl sm:text-3xl">🔊</span>
+                </button>
+            </div>
+
+            <!-- Interactive Work Area (Changes dynamically for Q1-20) -->
+            <div id="quiz-interactive-area" class="min-h-[220px] sm:min-h-[280px] flex flex-col items-center justify-center mb-5 p-2 bg-gradient-to-b from-sky-50/50 to-emerald-50/50 rounded-2xl border border-dashed border-sky-200">
+                <!-- Dynamic Content Injected via JavaScript -->
+            </div>
+
+            <!-- Mascot Reaction & Feedback Banner -->
+            <div id="feedback-banner" class="min-h-[56px] flex items-center justify-center mb-4 px-4 py-2 rounded-xl text-center font-comic text-lg sm:text-2xl hidden">
+                <span id="feedback-text"></span>
+            </div>
+
+            <!-- Navigation Footer -->
+            <div class="flex justify-end items-center pt-1">
+                <button id="btn-next-question" onclick="nextQuestion()" disabled
+                        class="btn-bounce bg-emerald-500 hover:bg-emerald-600 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none text-white font-comic text-lg sm:text-2xl px-6 py-3 rounded-2xl border-2 border-emerald-300 flex items-center space-x-2">
+                    <span>SOALAN SETERUSNYA</span>
+                    <span>➡️</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= RESULT SCREEN ================= -->
+        <section id="screen-result" class="w-full game-card p-6 sm:p-10 text-center hidden flex flex-col items-center my-auto no-print">
+            
+            <!-- Character Celebration Visual -->
+            <div class="flex justify-center items-center space-x-4 mb-3">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-amber-200 rounded-full border-3 border-amber-400 overflow-hidden shadow-md">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="46" fill="#FEF08A"/>
+                        <circle cx="50" cy="42" r="32" fill="#FDE047"/>
+                        <path d="M50,10 C47,-2 58,-4 52,-14" stroke="#78350F" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                        <circle cx="38" cy="38" r="4.5" fill="#0F172A"/>
+                        <circle cx="62" cy="38" r="4.5" fill="#0F172A"/>
+                        <path d="M34,50 Q50,70 66,50" stroke="#B45309" stroke-width="4" fill="none"/>
+                    </svg>
+                </div>
+                <div class="text-4xl sm:text-6xl">🏆</div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-sky-200 rounded-full border-3 border-sky-400 overflow-hidden shadow-md">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="46" fill="#BAE6FD"/>
+                        <circle cx="50" cy="42" r="32" fill="#FDE047"/>
+                        <circle cx="38" cy="38" r="4.5" fill="#0F172A"/>
+                        <circle cx="62" cy="38" r="4.5" fill="#0F172A"/>
+                        <path d="M34,50 Q50,70 66,50" stroke="#B45309" stroke-width="4" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+
+            <h2 class="font-comic text-3xl sm:text-5xl text-amber-600 mb-1">
+                TAHNIAH! ANDA HEBAT!
+            </h2>
+            <p class="text-base sm:text-xl font-bold text-gray-600 mb-5">
+                Permainan Telah Selesai!
+            </p>
+
+            <!-- Results Card Summary -->
+            <div class="w-full max-w-lg bg-gradient-to-br from-amber-50 to-yellow-100 p-6 rounded-3xl border-3 border-amber-300 shadow-inner mb-6">
+                <p class="text-lg sm:text-2xl font-bold text-amber-950 mb-3">
+                    Nama Murid: <span id="res-player-name" class="text-sky-700 underline"></span>
+                </p>
+
+                <!-- Stars Display -->
+                <div id="res-stars-container" class="flex justify-center space-x-2 text-4xl sm:text-6xl my-2">
+                    <span>⭐</span><span>⭐</span><span>⭐</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 my-4 text-center">
+                    <div class="bg-white p-3 rounded-2xl border border-amber-200">
+                        <span class="text-xs sm:text-sm text-gray-500 font-bold block">JUMLAH MARKAH</span>
+                        <span id="res-score-text" class="font-comic text-2xl sm:text-4xl text-amber-600">0 / 100</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl border border-amber-200">
+                        <span class="text-xs sm:text-sm text-gray-500 font-bold block">PERATUSAN</span>
+                        <span id="res-percentage-text" class="font-comic text-2xl sm:text-4xl text-emerald-600">0%</span>
+                    </div>
+                </div>
+
+                <p id="res-soalan-betul" class="text-base sm:text-lg font-bold text-gray-700 my-2">
+                    Bilangan Betul: <span id="res-correct-count" class="text-emerald-700 font-extrabold text-xl">0</span> / 20
+                </p>
+
+                <div class="mt-4 p-3 bg-white/90 rounded-xl border border-yellow-300">
+                <span id="res-category-badge" class="font-comic text-xl sm:text-2xl text-purple-700 block">
+                    CEMERLANG!
+                </span>
+            </div>
+        </div>
+
+        <!-- Action Buttons (Hanya 2 Butang) -->
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4 w-full max-w-lg">
+            <button onclick="restartGame()" 
+                    class="btn-bounce bg-amber-500 hover:bg-amber-600 text-white font-comic text-base sm:text-xl px-5 py-3 rounded-2xl border-2 border-amber-300 flex-1 min-w-[140px]">
+                🔄 MAIN SEMULA
+            </button>
+            <button onclick="returnToMainMenu()" 
+                    class="btn-bounce bg-gray-500 hover:bg-gray-600 text-white font-comic text-base sm:text-xl px-5 py-3 rounded-2xl border-2 border-gray-300 flex-1 min-w-[140px]">
+                🏠 MENU UTAMA
+            </button>
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="w-full max-w-4xl z-10 text-center py-2 text-xs sm:text-sm text-sky-900 font-bold opacity-80">
+        Permainan Interaktif Matematik PPKI • 20 Soalan Kenal & Kira Nombor
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Web Audio API Synthesizer (Zero external file dependency)
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSound(type) {
+            try {
+                initAudio();
+                if (!audioCtx) return;
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(420, now);
+                    osc.frequency.exponentialRampToValueAtTime(840, now + 0.08);
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } 
+                else if (type === 'correct') {
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const noteOsc = audioCtx.createOscillator();
+                        const noteGain = audioCtx.createGain();
+                        noteOsc.connect(noteGain);
+                        noteGain.connect(audioCtx.destination);
+                        
+                        noteOsc.type = 'triangle';
+                        noteOsc.frequency.setValueAtTime(freq, now + idx * 0.09);
+                        noteGain.gain.setValueAtTime(0.2, now + idx * 0.09);
+                        noteGain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.22);
+                        
+                        noteOsc.start(now + idx * 0.09);
+                        noteOsc.stop(now + idx * 0.09 + 0.22);
+                    });
+                } 
+                else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.linearRampToValueAtTime(140, now + 0.25);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+                else if (type === 'fanfare') {
+                    const tune = [400, 500, 600, 800];
+                    tune.forEach((f, i) => {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.frequency.setValueAtTime(f, now + i * 0.14);
+                        g.gain.setValueAtTime(0.25, now + i * 0.14);
+                        g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.14 + 0.28);
+                        o.start(now + i * 0.14);
+                        o.stop(now + i * 0.14 + 0.28);
+                    });
+                }
+            } catch (e) {
+                console.log("Audio not active or blocked", e);
+            }
+        }
+
+        // Bahasa Melayu Speech Synthesis (TTS)
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ms-MY';
+                utterance.rate = 0.85; // Calibrated for special needs learners
+                utterance.pitch = 1.1;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // ALL 20 QUESTIONS EXACTLY AS SPECIFIED
+        const questionsData = [
+            // --- BAHAGIAN A: KENAL NOMBOR (Soalan 1–7) ---
+            {
+                id: 1,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 3.',
+                speech: 'Pilih nombor Tiga.',
+                type: 'identify',
+                options: [2, 3, 5],
+                answer: 3
+            },
+            {
+                id: 2,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 0.',
+                speech: 'Pilih nombor Kosong.',
+                type: 'identify',
+                options: [0, 6, 8],
+                answer: 0
+            },
+            {
+                id: 3,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 7.',
+                speech: 'Pilih nombor Tujuh.',
+                type: 'identify',
+                options: [4, 7, 9],
+                answer: 7
+            },
+            {
+                id: 4,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 10.',
+                speech: 'Pilih nombor Sepuluh.',
+                type: 'identify',
+                options: [6, 8, 10],
+                answer: 10
+            },
+            {
+                id: 5,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 1.',
+                speech: 'Pilih nombor Satu.',
+                type: 'identify',
+                options: [1, 4, 7],
+                answer: 1
+            },
+            {
+                id: 6,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 5.',
+                speech: 'Pilih nombor Lima.',
+                type: 'identify',
+                options: [3, 5, 9],
+                answer: 5
+            },
+            {
+                id: 7,
+                part: 'Bahagian A: Kenal Nombor',
+                instruction: 'Pilih nombor 9.',
+                speech: 'Pilih nombor Sembilan.',
+                type: 'identify',
+                options: [6, 8, 9],
+                answer: 9
+            },
+
+            // --- BAHAGIAN B: KIRA BILANGAN OBJEK (Soalan 8–14) ---
+            {
+                id: 8,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira epal. Ada berapa biji epal?',
+                speech: 'Kira epal. Ada berapa biji epal?',
+                type: 'count',
+                itemEmoji: '🍎',
+                itemName: 'epal',
+                count: 2,
+                options: [1, 2, 3],
+                answer: 2
+            },
+            {
+                id: 9,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira ikan. Ada berapa ekor ikan?',
+                speech: 'Kira ikan. Ada berapa ekor ikan?',
+                type: 'count',
+                itemEmoji: '🐟',
+                itemName: 'ikan',
+                count: 4,
+                options: [3, 4, 5],
+                answer: 4
+            },
+            {
+                id: 10,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira bola. Ada berapa biji bola?',
+                speech: 'Kira bola. Ada berapa biji bola?',
+                type: 'count',
+                itemEmoji: '⚽',
+                itemName: 'bola',
+                count: 6,
+                options: [5, 6, 7],
+                answer: 6
+            },
+            {
+                id: 11,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira bunga. Ada berapa kuntum bunga?',
+                speech: 'Kira bunga. Ada berapa kuntum bunga?',
+                type: 'count',
+                itemEmoji: '🌸',
+                itemName: 'bunga',
+                count: 8,
+                options: [7, 8, 9],
+                answer: 8
+            },
+            {
+                id: 12,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira kucing. Ada berapa ekor kucing?',
+                speech: 'Kira kucing. Ada berapa ekor kucing?',
+                type: 'count',
+                itemEmoji: '🐱',
+                itemName: 'kucing',
+                count: 3,
+                options: [2, 3, 4],
+                answer: 3
+            },
+            {
+                id: 13,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira bintang. Ada berapa biji bintang?',
+                speech: 'Kira bintang. Ada berapa biji bintang?',
+                type: 'count',
+                itemEmoji: '⭐',
+                itemName: 'bintang',
+                count: 10,
+                options: [8, 9, 10],
+                answer: 10
+            },
+            {
+                id: 14,
+                part: 'Bahagian B: Kira Objek',
+                instruction: 'Kira belon. Ada berapa biji belon?',
+                speech: 'Kira belon. Ada berapa biji belon?',
+                type: 'count',
+                itemEmoji: '🎈',
+                itemName: 'belon',
+                count: 5,
+                options: [4, 5, 6],
+                answer: 5
+            },
+
+            // --- BAHAGIAN C: SUAI DAN PADAN (Soalan 15–20) ---
+            {
+                id: 15,
+                part: 'Bahagian C: Suai Padan',
+                instruction: 'Padankan nombor 2 dengan kumpulan objek yang betul.',
+                speech: 'Padankan nombor dua dengan kumpulan epal yang betul.',
+                type: 'match',
+                targetNumber: 2,
+                itemEmoji: '🍎',
+                itemName: 'epal',
+                options: [1, 2, 3],
+                answer: 2
+            },
+            {
+                id: 16,
+                part: 'Bahagian C: Suai Padan',
+                instruction: 'Padankan nombor 5 dengan kumpulan objek yang betul.',
+                speech: 'Padankan nombor lima dengan kumpulan ikan yang betul.',
+                type: 'match',
+                targetNumber: 5,
+                itemEmoji: '🐟',
+                itemName: 'ikan',
+                options: [4, 5, 6],
+                answer: 5
+            },
+            {
+                id: 17,
+                part: 'Bahagian C: Suai Padan',
+                instruction: 'Padankan nombor 7 dengan kumpulan objek yang betul.',
+                speech: 'Padankan nombor tujuh dengan kumpulan bola yang betul.',
+                type: 'match',
+                targetNumber: 7,
+                itemEmoji: '⚽',
+                itemName: 'bola',
+                options: [6, 7, 8],
+                answer: 7
+            },
+            {
+                id: 18,
+                part: 'Bahagian C: Suai Padan',
+                instruction: 'Padankan nombor 3 dengan kumpulan objek yang betul.',
+                speech: 'Padankan nombor tiga dengan kumpulan bunga yang betul.',
+                type: 'match',
+                targetNumber: 3,
+                itemEmoji: '🌸',
+                itemName: 'bunga',
+                options: [2, 3, 4],
+                answer: 3
+            },
+            {
+                id: 19,
+                part: 'Bahagian C: Suai Padan',
+                instruction: 'Padankan nombor 9 dengan kumpulan objek yang betul.',
+                speech: 'Padankan nombor sembilan dengan kumpulan bintang yang betul.',
+                type: 'match',
+                targetNumber: 9,
+                itemEmoji: '⭐',
+                itemName: 'bintang',
+                options: [8, 9, 10],
+                answer: 9
+            },
+            {
+                id: 20,
+                part: 'Bahagian C: Suai Padan',
+                instruction: 'Padankan nombor 10 dengan kumpulan objek yang betul.',
+                speech: 'Padankan nombor sepuluh dengan kumpulan belon yang betul.',
+                type: 'match',
+                targetNumber: 10,
+                itemEmoji: '🎈',
+                itemName: 'belon',
+                options: [8, 9, 10],
+                answer: 10
+            }
+        ];
+
+        // Game State Variables
+        let playerName = '';
+        let currentQuestionIndex = 0;
+        let score = 0; // 5 marks per question, total 100
+        let attemptsLeft = 2;
+        let answeredCorrectlyCount = 0;
+        let countedItemsTracker = new Set();
+
+        // Elements
+        const screenStart = document.getElementById('screen-start');
+        const screenQuiz = document.getElementById('screen-quiz');
+        const screenResult = document.getElementById('screen-result');
+        const inputName = document.getElementById('input-player-name');
+        const nameError = document.getElementById('name-error');
+        const nameGreeting = document.getElementById('name-greeting');
+        const greetingNameSpan = document.getElementById('greeting-name-span');
+        const playerBadge = document.getElementById('player-badge');
+        const displayPlayerName = document.getElementById('display-player-name');
+
+        // Name input listener
+        inputName.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (val.length > 0) {
+                nameError.classList.add('hidden');
+                greetingNameSpan.textContent = val;
+                nameGreeting.classList.remove('hidden');
+            } else {
+                nameGreeting.classList.add('hidden');
+            }
+        });
+
+        function startGame() {
+            playSound('click');
+            const nameVal = inputName.value.trim();
+            
+            if (!nameVal) {
+                nameError.classList.remove('hidden');
+                speakText("Sila masukkan nama murid dahulu ya!");
+                return;
+            }
+
+            playerName = nameVal;
+            displayPlayerName.textContent = playerName;
+            playerBadge.classList.remove('hidden');
+
+            // Reset Game Logic
+            currentQuestionIndex = 0;
+            score = 0;
+            answeredCorrectlyCount = 0;
+
+            screenStart.classList.add('hidden');
+            screenResult.classList.add('hidden');
+            screenQuiz.classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questionsData[currentQuestionIndex];
+            attemptsLeft = 2;
+            countedItemsTracker.clear();
+
+            // Progress text "Soalan 1/20"
+            document.getElementById('question-progress-text').textContent = `Soalan ${currentQuestionIndex + 1}/20`;
+            document.getElementById('current-score-text').textContent = score;
+            document.getElementById('activity-type-badge').textContent = q.part;
+            document.getElementById('question-instruction').textContent = q.instruction;
+
+            const nextBtn = document.getElementById('btn-next-question');
+            nextBtn.disabled = true;
+
+            hideFeedback();
+
+            // Render interactive workspace area
+            const workArea = document.getElementById('quiz-interactive-area');
+            workArea.innerHTML = '';
+
+            if (q.type === 'identify') {
+                renderIdentifyQuestion(q, workArea);
+            } else if (q.type === 'count') {
+                renderCountQuestion(q, workArea);
+            } else if (q.type === 'match') {
+                renderMatchQuestion(q, workArea);
+            }
+
+            // Auto speak instruction
+            setTimeout(() => {
+                readQuestionAudio();
+            }, 300);
+        }
+
+        function readQuestionAudio() {
+            const q = questionsData[currentQuestionIndex];
+            speakText(q.speech);
+        }
+
+        // RENDER QUESTION TYPE 1: IDENTIFY NUMBER (Q1–Q7)
+        function renderIdentifyQuestion(q, container) {
+            const wrapper = document.createElement('div');
+            wrapper.className = "flex flex-col items-center justify-center w-full py-4";
+
+            const visualIcon = document.createElement('div');
+            visualIcon.className = "text-6xl sm:text-7xl mb-6 animate-bounce";
+            visualIcon.textContent = "🔢";
+            wrapper.appendChild(visualIcon);
+
+            const optionsGrid = document.createElement('div');
+            optionsGrid.className = "grid grid-cols-3 gap-4 sm:gap-8 w-full max-w-lg";
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "btn-bounce option-btn bg-white hover:bg-yellow-100 text-amber-900 border-4 border-amber-400 font-comic text-4xl sm:text-6xl py-6 rounded-3xl shadow-md cursor-pointer flex justify-center items-center";
+                btn.textContent = opt;
+                btn.onclick = () => handleAnswerSelect(opt, q.answer, btn);
+                optionsGrid.appendChild(btn);
+            });
+
+            wrapper.appendChild(optionsGrid);
+            container.appendChild(wrapper);
+        }
+
+        // RENDER QUESTION TYPE 2: COUNT OBJECTS (Q8–Q14)
+        function renderCountQuestion(q, container) {
+            const wrapper = document.createElement('div');
+            wrapper.className = "flex flex-col items-center justify-center w-full py-2";
+
+            const hintText = document.createElement('p');
+            hintText.className = "text-xs sm:text-sm text-emerald-800 font-bold mb-3 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300";
+            hintText.textContent = "💡 Sentuh / klik objek di bawah untuk membilang!";
+            wrapper.appendChild(hintText);
+
+            const objectsGrid = document.createElement('div');
+            objectsGrid.className = "flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-6 max-w-xl p-4 bg-white/90 rounded-2xl border-2 border-sky-200 shadow-inner";
+
+            for (let i = 1; i <= q.count; i++) {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "count-obj flex flex-col items-center justify-center p-2 sm:p-3 bg-sky-50 rounded-2xl border-2 border-sky-300 cursor-pointer hover:bg-sky-100";
+                
+                const emojiSpan = document.createElement('span');
+                emojiSpan.className = "text-4xl sm:text-5xl";
+                emojiSpan.textContent = q.itemEmoji;
+
+                const numSpan = document.createElement('span');
+                numSpan.className = "font-comic text-xs sm:text-sm text-sky-700 font-bold mt-1 opacity-0 transition-opacity";
+                numSpan.textContent = `#${i}`;
+                numSpan.id = `obj-num-${i}`;
+
+                itemDiv.appendChild(emojiSpan);
+                itemDiv.appendChild(numSpan);
+
+                itemDiv.onclick = () => {
+                    playSound('click');
+                    if (!countedItemsTracker.has(i)) {
+                        countedItemsTracker.add(i);
+                        itemDiv.classList.add('counted');
+                        numSpan.classList.remove('opacity-0');
+                        speakText(`${i}`);
+                    }
+                };
+
+                objectsGrid.appendChild(itemDiv);
+            }
+            wrapper.appendChild(objectsGrid);
+
+            const optionsGrid = document.createElement('div');
+            optionsGrid.className = "grid grid-cols-3 gap-4 sm:gap-8 w-full max-w-lg";
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "btn-bounce option-btn bg-white hover:bg-yellow-100 text-amber-900 border-4 border-amber-400 font-comic text-3xl sm:text-5xl py-4 sm:py-5 rounded-3xl shadow-md cursor-pointer flex justify-center items-center";
+                btn.textContent = opt;
+                btn.onclick = () => handleAnswerSelect(opt, q.answer, btn);
+                optionsGrid.appendChild(btn);
+            });
+
+            wrapper.appendChild(optionsGrid);
+            container.appendChild(wrapper);
+        }
+
+        // RENDER QUESTION TYPE 3: MATCHING GROUPS (Q15–Q20)
+        function renderMatchQuestion(q, container) {
+            const wrapper = document.createElement('div');
+            wrapper.className = "flex flex-col items-center justify-center w-full py-2";
+
+            // Target Number Badge
+            const targetCard = document.createElement('div');
+            targetCard.className = "flex items-center space-x-3 bg-amber-400 text-amber-950 px-6 py-2.5 rounded-2xl border-4 border-amber-500 shadow-md mb-5";
+            
+            const targetLabel = document.createElement('span');
+            targetLabel.className = "font-comic text-lg sm:text-xl font-bold";
+            targetLabel.textContent = "Cari kumpulan:";
+
+            const targetNum = document.createElement('span');
+            targetNum.className = "font-comic text-4xl sm:text-5xl font-extrabold bg-white px-5 py-0.5 rounded-xl border-2 border-amber-600 text-amber-900";
+            targetNum.textContent = q.targetNumber;
+
+            targetCard.appendChild(targetLabel);
+            targetCard.appendChild(targetNum);
+            wrapper.appendChild(targetCard);
+
+            // 3 Group Options
+            const groupsContainer = document.createElement('div');
+            groupsContainer.className = "grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl";
+
+            q.options.forEach(countVal => {
+                const groupBtn = document.createElement('button');
+                groupBtn.className = "btn-bounce option-btn bg-white hover:bg-sky-50 border-4 border-sky-400 p-4 rounded-3xl shadow-md cursor-pointer flex flex-col items-center justify-center min-h-[110px]";
+
+                const itemsFlex = document.createElement('div');
+                itemsFlex.className = "flex flex-wrap justify-center gap-1.5 mb-2";
+
+                for (let k = 0; k < countVal; k++) {
+                    const itemSpan = document.createElement('span');
+                    itemSpan.className = "text-2xl sm:text-3xl";
+                    itemSpan.textContent = q.itemEmoji;
+                    itemsFlex.appendChild(itemSpan);
+                }
+
+                const countBadge = document.createElement('span');
+                countBadge.className = "font-comic text-xs sm:text-sm text-sky-800 bg-sky-100 px-3 py-0.5 rounded-full border border-sky-200";
+                countBadge.textContent = `${countVal} ${q.itemName}`;
+
+                groupBtn.appendChild(itemsFlex);
+                groupBtn.appendChild(countBadge);
+
+                groupBtn.onclick = () => handleAnswerSelect(countVal, q.answer, groupBtn);
+                groupsContainer.appendChild(groupBtn);
+            });
+
+            wrapper.appendChild(groupsContainer);
+            container.appendChild(wrapper);
+        }
+
+        // ANSWER SELECTION & EVALUATION LOGIC
+        function handleAnswerSelect(selectedVal, correctVal, btnElement) {
+            playSound('click');
+
+            const isCorrect = (selectedVal === correctVal);
+            const allOptionBtns = document.querySelectorAll('.option-btn');
+
+            if (isCorrect) {
+                // Correct answer gives 5 marks
+                playSound('correct');
+                score += 5; // 5 marks * 20 questions = 100 max
+                answeredCorrectlyCount++;
+                document.getElementById('current-score-text').textContent = score;
+
+                // Visual styling
+                btnElement.classList.remove('bg-white', 'hover:bg-yellow-100', 'hover:bg-sky-50');
+                btnElement.classList.add('bg-emerald-400', 'text-white', 'border-emerald-600', 'scale-105');
+
+                try {
+                    confetti({
+                        particleCount: 35,
+                        spread: 60,
+                        origin: { y: 0.7 }
+                    });
+                } catch(e){}
+
+                allOptionBtns.forEach(b => b.classList.add('pointer-events-none'));
+
+                const sweetPhrases = [
+                    "Betul, betul, betul! Bagus!",
+                    "Pandainya! Tahniah!",
+                    "Syabas! Jawapan tepat!",
+                    "Hebatnya Upin dan Ipin bangga!"
+                ];
+                const randomPhrase = sweetPhrases[Math.floor(Math.random() * sweetPhrases.length)];
+                showFeedback(true, `✨ ${randomPhrase}`);
+                speakText(randomPhrase);
+
+                document.getElementById('btn-next-question').disabled = false;
+
+            } else {
+                // Wrong answer handler (Max 2 attempts per question)
+                attemptsLeft--;
+
+                if (attemptsLeft === 1) {
+                    // First wrong attempt: Allow second chance
+                    playSound('wrong');
+                    btnElement.classList.add('opacity-40', 'pointer-events-none', 'bg-red-100');
+
+                    showFeedback(false, "❌ Cuba lagi! Kamu pasti boleh!");
+                    speakText("Cuba lagi! Kamu pasti boleh!");
+
+                } else {
+                    // Second wrong attempt: Reveal correct answer & give 0 marks
+                    playSound('wrong');
+                    allOptionBtns.forEach(b => b.classList.add('pointer-events-none'));
+
+                    allOptionBtns.forEach(b => {
+                        if (b.textContent.includes(correctVal.toString())) {
+                            b.classList.add('bg-emerald-300', 'border-emerald-500', 'animate-pulse');
+                        }
+                    });
+
+                    showFeedback(false, `💡 Jawapan yang betul ialah ${correctVal}. Jom teruskan!`);
+                    speakText(`Jawapan yang betul ialah ${correctVal}. Jom teruskan!`);
+
+                    document.getElementById('btn-next-question').disabled = false;
+                }
+            }
+        }
+
+        function showFeedback(isSuccess, message) {
+            const banner = document.getElementById('feedback-banner');
+            const textSpan = document.getElementById('feedback-text');
+
+            banner.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'border-emerald-400', 'bg-red-100', 'text-red-900', 'border-red-400', 'bg-amber-100', 'text-amber-900', 'border-amber-400');
+
+            if (isSuccess) {
+                banner.classList.add('bg-emerald-100', 'text-emerald-900', 'border-2', 'border-emerald-400');
+            } else if (attemptsLeft === 1) {
+                banner.classList.add('bg-amber-100', 'text-amber-900', 'border-2', 'border-amber-400');
+            } else {
+                banner.classList.add('bg-red-100', 'text-red-900', 'border-2', 'border-red-400');
+            }
+
+            textSpan.textContent = message;
+            banner.classList.remove('hidden');
+        }
+
+        function hideFeedback() {
+            const banner = document.getElementById('feedback-banner');
+            banner.classList.add('hidden');
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questionsData.length) {
+                loadQuestion();
+            } else {
+                showFinalResults();
+            }
+        }
+
+        // SHOW FINAL RESULTS SCREEN
+        function showFinalResults() {
+            playSound('fanfare');
+
+            screenQuiz.classList.add('hidden');
+            screenResult.classList.remove('hidden');
+
+            document.getElementById('res-player-name').textContent = playerName;
+            document.getElementById('res-score-text').textContent = `${score} / 100`;
+            
+            const percentage = Math.round((score / 100) * 100);
+            document.getElementById('res-percentage-text').textContent = `${percentage}%`;
+            document.getElementById('res-correct-count').textContent = answeredCorrectlyCount;
+
+            const starsContainer = document.getElementById('res-stars-container');
+            const categoryBadge = document.getElementById('res-category-badge');
+
+            let categoryText = "";
+            let starsHTML = "";
+
+            // Performance Classification according to rubric requirements
+            if (score >= 80) {
+                categoryText = "🌟 CEMERLANG!";
+                starsHTML = "⭐ ⭐ ⭐";
+                try {
+                    confetti({
+                        particleCount: 110,
+                        spread: 100,
+                        origin: { y: 0.5 }
+                    });
+                } catch(e){}
+                speakText(`Tahniah ${playerName}! Pencapaian anda Cemerlang!`);
+            } else if (score >= 50) {
+                categoryText = "👍 BAGUS!";
+                starsHTML = "⭐ ⭐ ⚪";
+                speakText(`Bagus ${playerName}! Teruskan usaha lagi ya!`);
+            } else {
+                categoryText = "💪 TERUSKAN USAHA!";
+                starsHTML = "⭐ ⚪ ⚪";
+                speakText(`Jangan putus asa ${playerName}! Sila cuba lagi!`);
+            }
+
+            starsContainer.innerHTML = starsHTML;
+            categoryBadge.textContent = categoryText;
+        }
+
+        function restartGame() {
+            playSound('click');
+            currentQuestionIndex = 0;
+            score = 0;
+            answeredCorrectlyCount = 0;
+
+            screenResult.classList.add('hidden');
+            screenQuiz.classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function returnToMainMenu() {
+            playSound('click');
+            screenResult.classList.add('hidden');
+            screenQuiz.classList.add('hidden');
+            screenStart.classList.remove('hidden');
+            playerBadge.classList.add('hidden');
+            inputName.value = '';
+            nameGreeting.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
